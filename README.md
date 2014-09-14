@@ -48,6 +48,7 @@ Hackaball is based on the tutorial [Roll-a-ball](http://unity3d.com/learn/tutori
 Unity3d is very controlling of its files.  You need to follow some simple steps to avoid issues.
 
 1. Don't move, add, or delete Unity3d asset files in your operating system.  Instead use Unity3d's project window to move, add or delete files.
+2. Exit Unity3d before using git.
 2. Under **Edit > Project Settings > Editor**, use **Version Control > Mode = Visable Meta Files** and **Asset Serialization > Mode = Force Text** ([ProjectSettings/EditorSettings.asset](https://github.com/bosshack/hackaball/blob/master/ProjectSettings/EditorSettings.asset) already has this configured.)
 3. It is best to avoid merging assets.  If possible avoid having two people work on a scene in parallel.
 4. Keep your assets small.  Nobody wants to checkout a large git repository.
