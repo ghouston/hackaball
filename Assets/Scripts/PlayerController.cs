@@ -36,7 +36,9 @@ public class PlayerController : MonoBehaviour {
 		if (other.gameObject.tag == "OutOfBounds") 
 		{
 			transform.position = new Vector3( spawnX, spawnY, spawnZ );
+			transform.rotation = Quaternion.identity;
 			rigidbody.velocity = new Vector3( 0, 0, 0 );
+			rigidbody.rotation = Quaternion.identity;
 			score += 1;
 			scoreText.text = "Score: " + score.ToString();
 			scoreText.enabled = true;
