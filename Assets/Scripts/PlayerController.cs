@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿   using UnityEngine;
 using System;
 using System.Collections;
 
@@ -7,6 +7,12 @@ public class PlayerController : MonoBehaviour {
 	public float horizontalSpeed = 2.0F;
 	public float verticalSpeed = 2.0F;
 	public int spawnY = 1;
+	private int score = 0;
+	public GUIText scoreText;
+
+	void Start() {
+		scoreText.enabled = false;
+	}
 
 	// Update is called before the engine renders a frame
 	void Update() {
@@ -17,12 +23,6 @@ public class PlayerController : MonoBehaviour {
 	{
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
-		if (moveHorizontal != 0.0) { 
-			Debug.Log(String.Format("moveHorizontal {0}", moveHorizontal));
-		}
-		if (moveVertical != 0.0) { 
-			Debug.Log(String.Format("moveVertical {0}", moveVertical)); 
-		}
 		Vector3 movement = new Vector3 (moveHorizontal, 0, moveVertical);
 
 		rigidbody.AddForce (movement * speed * Time.deltaTime);
@@ -33,9 +33,11 @@ public class PlayerController : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "OutOfBounds") 
 		{
-
 			transform.position = new Vector3( 0, spawnY, 0 );
 			rigidbody.velocity = new Vector3( 0, 0, 0 );
+			score += 1;
+			scoreText.text = "Score: " + score.ToString();
+			scoreText.enabled = true;
 		}
 	}
 }
