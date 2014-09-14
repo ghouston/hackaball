@@ -6,10 +6,12 @@ public class PlayerController : MonoBehaviour {
 	public float speed;
 	public float horizontalSpeed = 2.0F;
 	public float verticalSpeed = 2.0F;
-	public int spawnY = 1;
+	public int spawnX = 0;
+	public int spawnY = 11;
+	public int spawnZ = 0;
 	private int score = 0;
 	public GUIText scoreText;
-
+	
 	void Start() {
 		scoreText.enabled = false;
 	}
@@ -33,7 +35,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "OutOfBounds") 
 		{
-			transform.position = new Vector3( 0, spawnY, 0 );
+			transform.position = new Vector3( spawnX, spawnY, spawnZ );
 			rigidbody.velocity = new Vector3( 0, 0, 0 );
 			score += 1;
 			scoreText.text = "Score: " + score.ToString();
