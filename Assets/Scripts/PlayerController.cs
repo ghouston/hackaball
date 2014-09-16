@@ -4,8 +4,6 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 	public float speed;
-	public float horizontalSpeed = 2.0F;
-	public float verticalSpeed = 2.0F;
 	public int spawnX = 0;
 	public int spawnY = 11;
 	public int spawnZ = 0;
