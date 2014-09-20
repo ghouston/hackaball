@@ -1,4 +1,4 @@
-﻿   using UnityEngine;
+﻿using UnityEngine;
 using System;
 using System.Collections;
 
@@ -7,9 +7,11 @@ public class PlayerController : MonoBehaviour {
 	public int spawnX = 0;
 	public int spawnY = 11;
 	public int spawnZ = 0;
-	private int score = 0;
 	public GUIText scoreText;
-	
+
+	private int score = 0;
+	private bool shouldRespawn = false;
+
 	void Start() {
 		scoreText.enabled = false;
 	}
@@ -21,11 +23,19 @@ public class PlayerController : MonoBehaviour {
 	// FixedUpdate is called before the engine makes any physics calculations
 	void FixedUpdate()
 	{
-		float moveHorizontal = Input.GetAxis ("Horizontal");
-		float moveVertical = Input.GetAxis ("Vertical");
-		Vector3 movement = new Vector3 (moveHorizontal, 0, moveVertical);
+		if (shouldRespawn) {
+			transform.position = new Vector3( spawnX, spawnY, spawnZ );
+			transform.rotation = new Quaternion( 0, 0, 0, 0 );
+			rigidbody.velocity = new Vector3( 0, 0, 0 );
+			rigidbody.rotation = Quaternion.identity;
+			shouldRespawn = false;
+		} else {
+			float moveHorizontal = Input.GetAxis ("Horizontal");
+			float moveVertical = Input.GetAxis ("Vertical");
+			Vector3 movement = new Vector3 (moveHorizontal, 0, moveVertical);
 
-		rigidbody.AddForce (movement * speed * Time.deltaTime);
+			rigidbody.AddForce (movement * speed * Time.deltaTime);
+		}
 	}
 
 	// triggered on collision before physics performs a collision.
@@ -33,10 +43,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "OutOfBounds") 
 		{
-			transform.position = new Vector3( spawnX, spawnY, spawnZ );
-			transform.rotation = Quaternion.identity;
-			rigidbody.velocity = new Vector3( 0, 0, 0 );
-			rigidbody.rotation = Quaternion.identity;
+			shouldRespawn = true;
 			score += 1;
 			scoreText.text = "Score: " + score.ToString();
 			scoreText.enabled = true;
