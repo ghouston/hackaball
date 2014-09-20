@@ -7,13 +7,12 @@ public class PlayerController : MonoBehaviour {
 	public int spawnX = 0;
 	public int spawnY = 11;
 	public int spawnZ = 0;
-	public GUIText scoreText;
+	public ScoreBoardController scoreBoard;
 
-	private int score = 0;
 	private bool shouldRespawn = false;
 
 	void Start() {
-		scoreText.enabled = false;
+		scoreBoard.enabled = false;
 	}
 
 	// Update is called before the engine renders a frame
@@ -44,9 +43,14 @@ public class PlayerController : MonoBehaviour {
 		if (other.gameObject.tag == "OutOfBounds") 
 		{
 			shouldRespawn = true;
-			score += 1;
-			scoreText.text = "Score: " + score.ToString();
-			scoreText.enabled = true;
+			scoreBoard.NotifyIncreaseScore( -1 );
+			return;
+		}
+
+		if (other.gameObject.tag == "Finish") {
+			shouldRespawn = true;
+			scoreBoard.NotifyIncreaseScore (10);
+			return;
 		}
 	}
 }
