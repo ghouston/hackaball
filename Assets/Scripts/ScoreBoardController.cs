@@ -9,8 +9,17 @@ public class ScoreBoardController : MonoBehaviour {
 		guiText.enabled = false;
 	}
 
-	public void NotifyIncreaseScore( int value ) {
-		score += value;
+	public void NotifyGoal() {
+		score += 10;
+		updateScore();
+	}
+
+	public void NotifyFail() {
+		// for now, dont chang ethe score
+		return;
+	}
+
+	private void updateScore() {
 		guiText.text = "Score: " + score.ToString();
 		guiText.enabled = true;
 	}

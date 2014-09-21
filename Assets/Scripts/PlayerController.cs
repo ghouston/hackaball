@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour {
 	void FixedUpdate()
 	{
 		if (shouldRespawn) {
+			StopCoroutine("handleGoal");
 			transform.position = new Vector3( spawnX, spawnY, spawnZ );
 			transform.rotation = new Quaternion( 0, 0, 0, 0 );
 			rigidbody.velocity = new Vector3( 0, 0, 0 );
@@ -43,14 +44,19 @@ public class PlayerController : MonoBehaviour {
 		if (other.gameObject.tag == "OutOfBounds") 
 		{
 			shouldRespawn = true;
-			scoreBoard.NotifyIncreaseScore( -1 );
+			scoreBoard.NotifyFail();
 			return;
 		}
 
 		if (other.gameObject.tag == "Finish") {
-			shouldRespawn = true;
-			scoreBoard.NotifyIncreaseScore (10);
+			scoreBoard.NotifyGoal();
+			StartCoroutine("handleGoal");
 			return;
 		}
+	}
+
+	private IEnumerator handleGoal() {
+		yield return new WaitForSeconds(1);
+		shouldRespawn = true;
 	}
 }
