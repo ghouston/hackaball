@@ -8,13 +8,8 @@ public class CameraController : MonoBehaviour {
 	public float offsetY;
 	public float offsetZ;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+	// LateUpdate is called once per frame after all Update
+	void LateUpdate () {
 		// follow the game object
 		this.transform.position = new Vector3( 
       		objectToFollow.transform.position.x + offsetX, 

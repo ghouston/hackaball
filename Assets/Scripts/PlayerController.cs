@@ -15,10 +15,6 @@ public class PlayerController : MonoBehaviour {
 		scoreBoard.enabled = false;
 	}
 
-	// Update is called before the engine renders a frame
-	void Update() {
-	}
-	
 	// FixedUpdate is called before the engine makes any physics calculations
 	void FixedUpdate()
 	{
@@ -38,7 +34,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	// triggered on collision before physics performs a collision.
+	// Triggered once for a collision before physics performs a collision.
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.tag == "OutOfBounds") 
