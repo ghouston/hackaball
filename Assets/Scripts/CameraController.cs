@@ -10,7 +10,6 @@ public class CameraController : MonoBehaviour {
 
 	// LateUpdate is called once per frame after all Update
 	void LateUpdate () {
-		// follow the game object
 		this.transform.position = new Vector3( 
       		objectToFollow.transform.position.x + offsetX, 
       		objectToFollow.transform.position.y + offsetY,
